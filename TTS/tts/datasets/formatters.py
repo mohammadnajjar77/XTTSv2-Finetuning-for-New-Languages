@@ -112,13 +112,14 @@ def mozilla(root_path, meta_file, **kwargs):  # pylint: disable=unused-argument
     txt_file = os.path.join(root_path, meta_file)
     items = []
     speaker_name = "mozilla"
+    emotion_name = "neutral"
     with open(txt_file, "r", encoding="utf-8") as ttf:
         for line in ttf:
             cols = line.split("|")
             wav_file = cols[1].strip()
             text = cols[0].strip()
             wav_file = os.path.join(root_path, "wavs", wav_file)
-            items.append({"text": text, "audio_file": wav_file, "speaker_name": speaker_name, "root_path": root_path})
+            items.append({"text": text, "audio_file": wav_file, "speaker_name": speaker_name, "root_path": root_path, "ref_file": "null", "emotion_name": emotion_name})
     return items
 
 
