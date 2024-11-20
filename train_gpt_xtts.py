@@ -63,7 +63,7 @@ def train_gpt(metadatas, num_epochs, batch_size, grad_acumm, output_path, max_au
     # Define here the dataset that you want to use for the fine-tuning on.
     DATASETS_CONFIG_LIST = []
     for metadata in metadatas:
-        train_csv, language = metadata.split(",")
+        train_csv, a, language = metadata.split(",")
         print(train_csv, language)
 
         config_dataset = BaseDatasetConfig(
