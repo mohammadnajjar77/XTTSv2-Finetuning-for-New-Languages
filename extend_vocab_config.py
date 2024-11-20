@@ -50,8 +50,8 @@ def extend_tokenizer(args):
     existing_tokenizer.model.save(old_tokenizer_path)
 
     # train new tokenizer
-    traindf = pd.read_csv(args.metadata_path, sep="|")
-    texts = traindf.text.to_list()
+    traindf = pd.DataFrame(pd.read_csv(args.metadata_path, sep="|", index_col=False, header=None))
+    texts = traindf[0].to_list()
 
     new_tokenizer = Tokenizer(BPE())
     new_tokenizer.pre_tokenizer = Whitespace()
