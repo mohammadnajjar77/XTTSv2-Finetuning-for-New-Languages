@@ -63,15 +63,14 @@ def train_gpt(metadatas, num_epochs, batch_size, grad_acumm, output_path, max_au
     # Define here the dataset that you want to use for the fine-tuning on.
     DATASETS_CONFIG_LIST = []
     for metadata in metadatas:
-        train_csv, eval_csv, language = metadata.split(",")
-        print(train_csv, eval_csv, language)
+        train_csv, language = metadata.split(",")
+        print(train_csv, language)
 
         config_dataset = BaseDatasetConfig(
-            formatter="coqui",
+            formatter="mozilla", 
             dataset_name="ft_dataset",
-            path=os.path.dirname(train_csv),
-            meta_file_train=os.path.basename(train_csv),
-            meta_file_val=os.path.basename(eval_csv),
+            meta_file_train=os.path.basename(train_csv), 
+            path=os.path.dirname(train_csv) , 
             language=language,
         )
 
@@ -205,9 +204,9 @@ def train_gpt(metadatas, num_epochs, batch_size, grad_acumm, output_path, max_au
     trainer.fit()
 
     # get the longest text audio file to use as speaker reference
-    samples_len = [len(item["text"].split(" ")) for item in train_samples]
-    longest_text_idx =  samples_len.index(max(samples_len))
-    speaker_ref = train_samples[longest_text_idx]["audio_file"]
+    # samples_len = [len(item["text"].split(" ")) for item in train_samples]
+    # longest_text_idx =  samples_len.index(max(samples_len))
+    # speaker_ref = train_samples[longest_text_idx]["audio_file"]
 
     trainer_out_path = trainer.output_path
 
